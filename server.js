@@ -18,11 +18,11 @@ app.use(express.static(path.join(__dirname, '\./dist/tr6crud/'))) //express()
   .use(bodyParser.json())
   .use(express.static(path.join(__dirname, '\./dist/tr6crud/index.html')))
   .get('\/*', (req, res) => {
-    console.log('path=' + path.join(__dirname, 'dist/tr6crud/index.html'));
-    res.sendFile(path.join(__dirname, 'dist/tr6crud/index.html'))
+    console.log('path=' + path.join(__dirname, '\./dist/tr6crud/index.html'));
+    res.sendFile(path.join(__dirname, '\./dist/tr6crud/index.html'))
   })
   .listen(port, () => {
-    console.log('path=' + path.join(__dirname, '\/dist/tr6crud/index.html'));
+    console.log('path=' + path.join(__dirname, '\./dist/tr6crud/index.html'));
     console.log('Listening on port ' + port);
   })
-  module.exports = express;
+  module.exports = app; //express;
