@@ -1,0 +1,25 @@
+{
+  "development": {
+     "url": "postgres://postgres:P2ssw0rd@localhost:5432/ag5ted",
+     "dialect": "postgres",
+     "ssl": false,
+     "dialectOptions": {
+       "ssl": false
+     },
+     "operatorsAliases": false
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
