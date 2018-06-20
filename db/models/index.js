@@ -11,7 +11,7 @@ const fs        = require('fs'),
 console.log('process.env.NODE_ENV=', `${process.env.NODE_ENV}`,
             '\nenv=',env,
             '\ndb/model/config.url=', config.url,
-            '\ndb/model/config', `${process.env.DATABASE_URL}`,
+            '\ndb/model/config', process.env.DATABASE_URL,
             '\nconfig.use_env_variable=', `${config.use_env_variable}`
           );
 
@@ -25,6 +25,15 @@ if (env === 'production') {
           ssl: true
         }
       });
+} else if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialec: 'postgres',
+    ssl: true,
+    operatorsAliases: false,
+    dialectOptions: {
+      ssl: true
+    }
+  });
 } else {
   sequelize = new Sequelize(config.url, {
     dialec: 'postgres',
