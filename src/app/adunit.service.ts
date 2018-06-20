@@ -5,7 +5,11 @@ import { AdUnit } from './components/index/adUnits';
   providedIn: 'root'
 })
 export class AdunitService {
-  uri = 'http://localhost:8080/adunits';
+  // uri = 'http://localhost:5432/adunits';
+  uria = 'postgres://qinlrafysrwafs:34e161122060fa8f10d932a22eab57768628b267473d75501349d0e34a1d1870';
+  urib = '@ec2-174-129-192-200.compute-1.amazonaws.com:5432/';
+  uric = 'd8pdtui7on0uec';
+  uri = this.uria + this.urib + this.uric;
 
   constructor(private http: HttpClient) { }
 

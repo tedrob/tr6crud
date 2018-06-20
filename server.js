@@ -9,7 +9,7 @@ const express     = require('express'),
       // db          = require('\./src/db/models'),
       db = require(path.join(__dirname, '\./db/models')),
       // adUnitRoutes = require(path.join(__dirname, '\./routes/aduint.route.js')),
-      adUnitRoutes = require(path.join(__dirname, '\./db/routes/aduint.route.js')),
+      // adUnitRoutes = require(path.join(__dirname, '\./db/routes/aduint.route.js')),
       { Pool }    = require('pg'),
       pool        = new Pool({
         connectString: process.env.DATABASE_URL,
@@ -17,7 +17,8 @@ const express     = require('express'),
       });
 
 console.log('server-adU.', path.join(__dirname, '\./routes/aduint.route.js'));
-app.use('\/adunits', adUnitRoutes);
+// app.use('\/adunits', adUnitRoutes);
+require('./db/routes/')(app);
 
 db.sequelize.sync()
 .then(() => { //
