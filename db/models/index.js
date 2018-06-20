@@ -11,6 +11,7 @@ const fs        = require('fs'),
 console.log('process.env.NODE_ENV=', `${process.env.NODE_ENV}`,
             '\nenv=',env,
             '\ndb/model/config.url=', config.url,
+            '\ndb/model/config', config,
             '\nconfig.use_env_variable=', `${config.use_env_variable}`
           );
 
