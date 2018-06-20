@@ -1,12 +1,13 @@
 {
   "development": {
-     "url": "postgres://postgres:P2ssw0rd@localhost:5432/ag5ted",
-     "dialect": "postgres",
-     "ssl": false,
-     "dialectOptions": {
-       "ssl": false
-     },
-     "operatorsAliases": false
+    "url": "postgres://postgres:P2ssw0rd@localhost:5432/ag5ted",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "ssl": false,
+    "dialectOptions": {
+      "ssl": false
+    },
+    "operatorsAliases": false
   },
   "test": {
     "username": "root",

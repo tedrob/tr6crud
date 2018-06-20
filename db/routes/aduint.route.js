@@ -1,20 +1,19 @@
 // adunit.route.js
 const express       = require('express'),
       app           = express(),
-      path          = require('path'),
-      AdUnit        = require('\../src/db/models/adunit.js'),
       adUnitRoutes  = express.Router(),
-      env = process.env.NODE_ENV || 'development',
-      config = process.env.DATABASE_URL || require('\../config.json')[env],
-      Sequelize     = require('sequelize');
-console.log('route2', config);
+      AdUnit        = require('\./../models/adunit');
 
-if (env !== 'production') {
-  require('dotenv').load();
-}
+      // path          = require('path'),
+      //AdUnit        = require('\../src/db/models/adunit.js'),
+      //AdUnit        = require('\./../models/adunit.js'),
+      // env = process.env.NODE_ENV || 'development',
+      // config = process.env.DATABASE_URL || require('\../config.json')[env],
+      // Sequelize     = require('sequelize');
+// console.log('db/routes env=', env,
+//            '\nroutes config',config.url);
 
-let sequelize;
-//if (config.use_env_variable) {
+/* let sequelize;
 if (env === 'production') {
   sequelize = new Sequelize(`${process.env.DATABASE_URL}`, {
     dialec: 'postgres',
@@ -25,7 +24,7 @@ if (env === 'production') {
     }
   });
 } else {
-  sequelize = new Sequelize(`${process.env.DATABASE_URL_DEV}`, {
+  sequelize = new Sequelize(config.url, {
     dialec: 'postgres',
     ssl: false,
     operatorsAliases: false,
@@ -50,12 +49,12 @@ const Posts = sequelize.define('AdUnit', {
   unit_price: {
     type: Sequelize.DECIMAL
   },
-});
+}); */
 // define store route
 adUnitRoutes.route('/add')
-  .post((req, res, next) => {
+  .post((req, res) => {
     const adUnit = new AdUnit(req.body);
-    Posts.create.create({
+    Posts.create({
       unit_name: req.body.unit_name,
       unit_price: req.body.unit_price
     })
@@ -67,7 +66,19 @@ adUnitRoutes.route('/add')
     .catch((err) => {
       res.status(400).send("unable to save to database");
     })
-    next;
   });
+
+adUnitRoutes.route('/')
+  .get((req, res) => {
+    adUnit.find((err, adUnits) => {
+      if(err) {
+        console.log(err);
+      } else {
+        res.json(adUnits);
+      }
+    });
+  });
+
+
 
 module.exports = adUnitRoutes;
