@@ -11,8 +11,10 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strictNullChecks": false, // just added incase I go with ts for server
     "target": "es5",
     "module": "commonjs", //"module": "es2015", //"module": "commonjs",
+    "strict": true,
     "typeRoots": [
       "node_modules/@types"
     ],

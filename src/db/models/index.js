@@ -8,51 +8,58 @@ const fs        = require('fs'),
       config    = process.env.DATABASE_URL || require('\./../config.json')[env],
       db        = {};
 
-console.log('process.env.NODE_ENV=', `${process.env.NODE_ENV}`,
-            '\nenv=',env,
-            '\ndb/model/config.url=', config.url,
-            '\ndb/model/config', process.env.DATABASE_URL,
-            '\nconfig.use_env_variable=', `${config.use_env_variable}`
-          );
+console.log('in Models index')
 
 let sequelize;
 if (env === 'production') {
   sequelize = new Sequelize(`${process.env.DATABASE_URL}`, {
-        dialec: 'postgres',
-        ssl: true,
-        operatorsAliases: false,
-        dialectOptions: {
-          ssl: true
-        }
-      });
-} else if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    host: 'localhost',
     dialec: 'postgres',
     ssl: true,
-    operatorsAliases: false,
     dialectOptions: {
       ssl: true
-    }
+    },
+    operatorsAliases: false,
+    // to  create a pool of connections
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    },
+  });
+} else if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    host: 'localhost',
+    dialec: 'postgres',
+    ssl: true,
+    dialectOptions: {
+      ssl: true
+    },
+    operatorsAliases: false,
+    // to  create a pool of connections
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    },
   });
 } else {
   sequelize = new Sequelize(config.url, {
+    host: 'localhost',
     dialec: 'postgres',
     ssl: false,
-    operatorsAliases: false,
     dialectOptions: {
       ssl: false
-    }
+    },
+    operatorsAliases: false,
+    // to  create a pool of connections
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    },
   });
-}
-
-/* sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Models2 Database connected and authenticated!');
-  })
-  .catch((err) => {
-    console.error('Failed2 to connect and authenticate', err);
-  }); */
+} //
 
 fs
   .readdirSync(__dirname)
@@ -72,5 +79,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.adunits = require('./adunit')(sequelize, Sequelize);
 
 module.exports = db;

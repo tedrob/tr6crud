@@ -8,23 +8,8 @@ import { EditComponent } from './components/edit/edit.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AdunitService } from './adunit.service';
-import { ReactiveFormsModule } from '@angular/forms';
-
-const routes: Routes = [
-  {
-    path: 'create',
-    component: CreateComponent
-  },
-  {
-    path: 'edit/:id',
-    component: EditComponent
-  },
-  {
-    path: 'index',
-    component: IndexComponent
-  }
-];
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { appRoutes } from './routerConfig';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +19,9 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [AdunitService],

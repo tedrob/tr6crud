@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.adunitService
       .getAdUnits()
-      .subscribe((data: AdUnit[]) => {
+      .subscribe((data: any) => {
         this.adunits = data;
       });
   }

@@ -22,7 +22,7 @@ export class CreateComponent implements OnInit {
     });
   }
 
-  addAdUnit(unit_name, unit_price) {
+  addAdUnit(unit_name: any, unit_price: any) {
     this.adunitservice.addAdUnit(unit_name, unit_price);
   }
 
